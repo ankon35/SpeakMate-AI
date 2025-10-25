@@ -108,3 +108,8 @@ Then follow the official sequence strictly:
 7. Transition to Part 3 naturally.  
 8. Apply the **5-second delay rule** during all candidate responses.  
 """
+
+
+
+
+

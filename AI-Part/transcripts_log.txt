@@ -1,0 +1,218 @@
+2025-10-23 01:44:25,703 - Using selector: EpollSelector
+2025-10-23 01:44:25,704 - starting worker
+2025-10-23 01:44:25,704 - preloading plugins
+2025-10-23 01:44:25,708 - initializing job runner
+2025-10-23 01:44:25,709 - Using selector: EpollSelector
+2025-10-23 01:44:25,709 - job runner initialized
+2025-10-23 01:44:25,771 - Initializing LiveKit session
+2025-10-23 01:44:26,762 - connecting to Gemini Realtime API...
+2025-10-23 01:44:26,763 - http_session(): creating a new httpclient ctx
+2025-10-23 01:44:26,764 - using audio io: `ChatCLI` -> `AgentSession` -> `TranscriptSynchronizer` -> `ChatCLI`
+2025-10-23 01:44:26,764 - using transcript io: `AgentSession` -> `TranscriptSynchronizer` -> `ChatCLI`
+2025-10-23 01:44:26,764 - Connected to LiveKit room. Gemini Live is active
+2025-10-23 01:44:55,016 - ASSISTANT: This is the speaking test of the International English Language Testing System, taking place on Tuesday, October 1st, at the 10 Minute School Center Number 1-2-1-2-3-9-6-7. The candidate is [Candidate Name], and the candidate number is 3-4-5-3-2-4-6. The examiner is Sania Akter Monni, and the examiner number is 9-8-0-7-5-8. Good afternoon. Could you please tell me your full name?
+
+2025-10-23 01:44:59,993 - received user transcript
+2025-10-23 01:45:02,005 - USER: Yes my name is
+2025-10-23 01:45:02,005 - USER: Yes my name is
+2025-10-23 01:45:02,018 - truncate is not supported by the Google Realtime API.
+2025-10-23 01:45:02,018 - ASSISTANT: Thank you, Arafat.
+2025-10-23 01:45:08,428 - USER: এই
+2025-10-23 01:45:08,428 - USER: এই
+2025-10-23 01:45:08,433 - truncate is not supported by the Google Realtime API.
+2025-10-23 01:45:08,433 - ASSISTANT: afat. What
+2025-10-23 01:45:09,070 - received user transcript
+2025-10-23 01:45:12,052 - USER: হ্যালো।
+2025-10-23 01:45:12,052 - USER: হ্যালো।
+2025-10-23 01:45:12,102 - ASSISTANT: What should I call you during this test?
+
+2025-10-23 01:45:15,092 - received user transcript
+2025-10-23 01:45:19,279 - USER: यू कैन कॉल मी अराफ
+2025-10-23 01:45:19,279 - USER: यू कैन कॉल मी अराफ
+2025-10-23 01:45:19,404 - ASSISTANT: Thank you, Arafat. May I see your identification, please?
+
+2025-10-23 01:45:22,529 - received user transcript
+2025-10-23 01:45:31,330 - USER: Yes here you go.
+2025-10-23 01:45:31,330 - USER: Yes here you go.
+2025-10-23 01:45:31,344 - ASSISTANT: Thank you. Now, in this part, I’m going to ask you some questions about your hobbies. What kind of hobbies are popular in your country?
+
+2025-10-23 01:45:39,034 - received user transcript
+2025-10-23 01:45:41,741 - received user transcript
+2025-10-23 01:45:46,696 - received user transcript
+2025-10-23 01:45:47,839 - received user transcript
+2025-10-23 01:45:52,719 - USER: There are different type of hobbies in popular in my country because every individual like different things so that hobbies are different of all others.
+2025-10-23 01:45:52,720 - USER: There are different type of hobbies in popular in my country because every individual like different things so that hobbies are different of all others.
+2025-10-23 01:45:52,750 - ASSISTANT: Could you describe one of your favorite hobbies and why you enjoy it?
+
+2025-10-23 01:45:58,998 - received user transcript
+2025-10-23 01:46:00,610 - received user transcript
+2025-10-23 01:46:03,467 - received user transcript
+2025-10-23 01:46:08,468 - received user transcript
+2025-10-23 01:46:11,758 - received user transcript
+2025-10-23 01:46:16,632 - USER: Yes basically I like playing football with my friends they are in later time I play with my friends I because football is every once emotions
+2025-10-23 01:46:16,633 - USER: Yes basically I like playing football with my friends they are in later time I play with my friends I because football is every once emotions
+2025-10-23 01:46:16,646 - ASSISTANT: Are there any hobbies that are more common among older people in your country?
+
+2025-10-23 01:46:22,269 - received user transcript
+2025-10-23 01:46:26,413 - received user transcript
+2025-10-23 01:46:34,864 - USER: प्रोबब्ली नॉट बिकॉज एवरी इंडिविजुअल्स हैव डिफरेंट चॉइसस
+2025-10-23 01:46:34,864 - USER: प्रोबब्ली नॉट बिकॉज एवरी इंडिविजुअल्स हैव डिफरेंट चॉइसस
+2025-10-23 01:46:34,878 - ASSISTANT: Do you think having a hobby is important? Why or why not?
+
+2025-10-23 01:46:39,326 - shutting down worker
+2025-10-23 01:46:39,327 - shutting down job task
+2025-10-23 01:46:39,329 - send task finished.
+2025-10-23 01:46:39,330 - job exiting
+2025-10-23 01:46:41,331 - session closed
+2025-10-23 01:46:41,331 - http_session(): closing the httpclient ctx
+2025-10-23 02:00:54,857 - Using selector: EpollSelector
+2025-10-23 02:00:54,858 - starting worker
+2025-10-23 02:00:54,858 - preloading plugins
+2025-10-23 02:00:54,862 - initializing job runner
+2025-10-23 02:00:54,862 - Using selector: EpollSelector
+2025-10-23 02:00:54,862 - job runner initialized
+2025-10-23 02:00:54,884 - Initializing LiveKit session
+2025-10-23 02:00:55,911 - connecting to Gemini Realtime API...
+2025-10-23 02:00:55,912 - http_session(): creating a new httpclient ctx
+2025-10-23 02:00:55,913 - using audio io: `ChatCLI` -> `AgentSession` -> `TranscriptSynchronizer` -> `ChatCLI`
+2025-10-23 02:00:55,913 - using transcript io: `AgentSession` -> `TranscriptSynchronizer` -> `ChatCLI`
+2025-10-23 02:00:55,913 - Connected to LiveKit room. Gemini Live is active
+2025-10-23 02:01:27,723 - ASSISTANT: This is the speaking test of the International English Language Testing System, taking place on Tuesday, October 1st, at the 10 Minute School Center Number 1-2-1-2-3-9-6-7. The candidate is [Candidate Name], and the candidate number is 3-4-5-3-2-4-6. The examiner is Sania Akter Monni, and the examiner number is 9-8-0-7-5-8. Good afternoon. Could you please tell me your full name?
+
+2025-10-23 02:01:32,323 - received user transcript
+2025-10-23 02:01:36,314 - USER: Yes, my name is Arafat Hussein.
+2025-10-23 02:01:36,315 - USER: Yes, my name is Arafat Hussein.
+2025-10-23 02:01:36,327 - ASSISTANT: Thank you, Arafat. What should I call you during this test?
+
+2025-10-23 02:01:39,854 - received user transcript
+2025-10-23 02:01:44,321 - USER: यु क्यान कल मि आफत
+2025-10-23 02:01:44,321 - USER: यु क्यान कल मि आफत
+2025-10-23 02:01:44,335 - ASSISTANT: Thank you, Arafat. Could you please show me your identification?
+
+2025-10-23 02:01:47,324 - received user transcript
+2025-10-23 02:01:52,170 - USER: Yes, here you go.
+2025-10-23 02:01:52,171 - USER: Yes, here you go.
+2025-10-23 02:01:52,179 - ASSISTANT: Alright, thank you. In this part, I’m going to ask you some questions about daily routines.
+
+2025-10-23 02:01:55,622 - received user transcript
+2025-10-23 02:01:59,104 - USER: Okay.
+2025-10-23 02:01:59,104 - USER: Okay.
+2025-10-23 02:01:59,116 - ASSISTANT: Can you describe your typical morning routine?
+
+2025-10-23 02:02:05,479 - received user transcript
+2025-10-23 02:02:08,918 - received user transcript
+2025-10-23 02:02:10,454 - received user transcript
+2025-10-23 02:02:15,074 - received user transcript
+2025-10-23 02:02:19,200 - received user transcript
+2025-10-23 02:02:23,716 - USER: टिपिकल मनिङ रुटिन आइ वर्क अप एट ९ ओ क्लक देन आइ फेस फ्रश अप टु माइ ब्रश देन आइ स्क्रल Facebook एंड सी माइ टु डु लिस्ट देन स्टार्ट माइ मर्निङ
+2025-10-23 02:02:23,717 - USER: टिपिकल मनिङ रुटिन आइ वर्क अप एट ९ ओ क्लक देन आइ फेस फ्रश अप टु माइ ब्रश देन आइ स्क्रल Facebook एंड सी माइ टु डु लिस्ट देन स्टार्ट माइ मर्निङ
+2025-10-23 02:02:23,756 - ASSISTANT: What part of your morning routine do you enjoy the most?
+
+2025-10-23 02:02:29,745 - shutting down worker
+2025-10-23 02:02:29,747 - shutting down job task
+2025-10-23 02:02:29,749 - send task finished.
+2025-10-23 02:02:29,749 - job exiting
+2025-10-23 02:02:31,746 - exiting forcefully
+2025-10-23 02:04:41,422 - Using selector: EpollSelector
+2025-10-23 02:04:41,423 - starting worker
+2025-10-23 02:04:41,423 - preloading plugins
+2025-10-23 02:04:41,427 - initializing job runner
+2025-10-23 02:04:41,427 - Using selector: EpollSelector
+2025-10-23 02:04:41,427 - job runner initialized
+2025-10-23 02:04:41,449 - Initializing LiveKit session
+2025-10-23 02:04:42,429 - connecting to Gemini Realtime API...
+2025-10-23 02:04:42,430 - http_session(): creating a new httpclient ctx
+2025-10-23 02:04:42,431 - using audio io: `ChatCLI` -> `AgentSession` -> `TranscriptSynchronizer` -> `ChatCLI`
+2025-10-23 02:04:42,431 - using transcript io: `AgentSession` -> `TranscriptSynchronizer` -> `ChatCLI`
+2025-10-23 02:04:42,431 - Connected to LiveKit room. Gemini Live is active
+2025-10-23 02:05:10,540 - ASSISTANT: This is the speaking test of the International English Language Testing System, taking place on Tuesday, October 1st, at the 10 Minute School Center Number 1-2-1-2-3-9-6-7. The candidate is [Candidate Name], and the candidate number is 3-4-5-3-2-4-6. The examiner is Sania Akter Monni, and the examiner number is 9-8-0-7-5-8. Good afternoon. Could you please tell me your full name?
+
+2025-10-23 02:05:17,122 - received user transcript
+2025-10-23 02:05:19,300 - USER: Yes, my name is Arafat Hussein.
+2025-10-23 02:05:19,300 - USER: Yes, my name is Arafat Hussein.
+2025-10-23 02:05:19,304 - ASSISTANT: Thank you, Arafat. What should I call you during this test?
+
+2025-10-23 02:05:22,594 - received user transcript
+2025-10-23 02:05:27,354 - USER: यु क्यान कल मि अराफत
+2025-10-23 02:05:27,355 - USER: यु क्यान कल मि अराफत
+2025-10-23 02:05:27,365 - ASSISTANT: Thank you, Arafat. Could you please show me your identification, please?
+
+2025-10-23 02:05:30,754 - received user transcript
+2025-10-23 02:05:36,369 - USER: यस हियर यू गो
+2025-10-23 02:05:36,370 - USER: यस हियर यू गो
+2025-10-23 02:05:36,383 - ASSISTANT: Thank you. All right, Arafat, in this first part, I'm going to ask you some questions about your accommodation.
+
+
+2025-10-23 02:05:36,521 - shutting down worker
+2025-10-23 02:05:36,522 - shutting down job task
+2025-10-23 02:05:36,524 - send task finished.
+2025-10-23 02:05:36,524 - job exiting
+2025-10-23 02:05:38,526 - session closed
+2025-10-23 02:05:38,526 - http_session(): closing the httpclient ctx
+2025-10-23 02:07:06,952 - Using selector: EpollSelector
+2025-10-23 02:07:06,953 - starting worker
+2025-10-23 02:07:06,953 - preloading plugins
+2025-10-23 02:07:06,957 - initializing job runner
+2025-10-23 02:07:06,957 - Using selector: EpollSelector
+2025-10-23 02:07:06,957 - job runner initialized
+2025-10-23 02:07:06,979 - Initializing LiveKit session
+2025-10-23 02:07:07,969 - connecting to Gemini Realtime API...
+2025-10-23 02:07:07,970 - http_session(): creating a new httpclient ctx
+2025-10-23 02:07:07,971 - using audio io: `ChatCLI` -> `AgentSession` -> `TranscriptSynchronizer` -> `ChatCLI`
+2025-10-23 02:07:07,971 - using transcript io: `AgentSession` -> `TranscriptSynchronizer` -> `ChatCLI`
+2025-10-23 02:07:07,971 - Connected to LiveKit room. Gemini Live is active
+2025-10-23 02:07:40,206 - ASSISTANT: This is the speaking test of the International English Language Testing System, taking place on Tuesday, October 1st, at the 10 Minute School Center Number 1-2-1-2-3-9-6-7. The candidate is [Candidate Name], and the candidate number is 3-4-5-3-2-4-6. The examiner is Sania Akter Monni, and the examiner number is 9-8-0-7-5-8. Good afternoon. Could you please tell me your full name?
+
+2025-10-23 02:07:45,010 - received user transcript
+2025-10-23 02:07:49,327 - USER: ఆ ఆ ఆ ఆ
+2025-10-23 02:07:49,328 - USER: ఆ ఆ ఆ ఆ
+2025-10-23 02:07:49,341 - ASSISTANT: Thank you, Arafat. What should I call you during this test?
+
+2025-10-23 02:07:52,971 - received user transcript
+2025-10-23 02:07:56,462 - USER: You can call me
+2025-10-23 02:07:56,463 - USER: You can call me
+2025-10-23 02:07:56,518 - ASSISTANT: Thank you, Arafat. Could you please show me your identification?
+
+2025-10-23 02:08:00,004 - received user transcript
+2025-10-23 02:08:06,100 - USER: Yes here we go.
+2025-10-23 02:08:06,100 - USER: Yes here we go.
+2025-10-23 02:08:06,104 - ASSISTANT: Thank you.
+
+In this part, I’m going to ask you some questions about your neighborhood.
+
+Do you like your neighborhood?
+
+2025-10-23 02:08:12,535 - received user transcript
+2025-10-23 02:08:15,293 - USER ORIGINAL (bn): কতদিন মার্কেট নট অ্যাট অল
+2025-10-23 02:08:15,293 - USER TRANSLATED -> en: কতদিন মার্কেট নট অ্যাট অল
+2025-10-23 02:08:15,294 - USER ORIGINAL (bn): কতদিন মার্কেট নট অ্যাট অল
+2025-10-23 02:08:15,294 - USER TRANSLATED -> en: কতদিন মার্কেট নট অ্যাট অল
+2025-10-23 02:08:15,306 - ASSISTANT: What do you think could be improved in your neighborhood?
+
+2025-10-23 02:08:22,383 - shutting down worker
+2025-10-23 02:08:22,384 - shutting down job task
+2025-10-23 02:08:22,385 - send task finished.
+2025-10-23 02:08:22,385 - job exiting
+2025-10-23 02:08:24,387 - session closed
+2025-10-23 02:08:24,387 - http_session(): closing the httpclient ctx
+2025-10-23 02:11:13,770 - Using selector: EpollSelector
+2025-10-23 02:11:13,771 - starting worker
+2025-10-23 02:11:13,771 - preloading plugins
+2025-10-23 02:11:13,774 - initializing job runner
+2025-10-23 02:11:13,775 - Using selector: EpollSelector
+2025-10-23 02:11:13,775 - job runner initialized
+2025-10-23 02:11:13,836 - Initializing LiveKit session
+2025-10-23 02:11:14,829 - connecting to Gemini Realtime API...
+2025-10-23 02:11:14,830 - http_session(): creating a new httpclient ctx
+2025-10-23 02:11:14,831 - using audio io: `ChatCLI` -> `AgentSession` -> `TranscriptSynchronizer` -> `ChatCLI`
+2025-10-23 02:11:14,831 - using transcript io: `AgentSession` -> `TranscriptSynchronizer` -> `ChatCLI`
+2025-10-23 02:11:14,831 - Connected to LiveKit room. Gemini Live is active
+2025-10-23 02:11:52,520 - received user transcript
+2025-10-23 02:11:59,526 - received user transcript
+2025-10-23 02:12:04,932 - received user transcript
+2025-10-23 02:12:19,859 - shutting down worker
+2025-10-23 02:12:19,861 - shutting down job task
+2025-10-23 02:12:19,864 - send task finished.
+2025-10-23 02:12:19,864 - job exiting
+2025-10-23 02:12:21,866 - session closed
+2025-10-23 02:12:21,866 - http_session(): closing the httpclient ctx
