@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpeakMate-AI - Practice with AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="landing.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                SpeakMate-AI
+            </div>
+            <ul class="nav-links">
+                <li><a data-scroll="hero">Home</a></li>
+                <li><a data-scroll="how-it-works">How It Works</a></li>
+                <li><a data-scroll="feedback">Testimonials</a></li>
+                <li><a data-scroll="contact">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button id="loginBtn" class="btn btn-outline">Login</button>
+                <button id="signupBtn" class="btn btn-primary">Sign Up</button>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-sparkles"></i>
+                    AI-Powered IELTS Preparation
+                </div>
+                <h1>Master IELTS Speaking with AI</h1>
+                <p>Practice with our intelligent AI agent, receive instant feedback on your performance, and boost your
+                    confidence for the real test.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-large"
+                        onclick="window.location.href='/SpeakMate-AI/Frontend-Part/Test-page/test.html'">
+                        <i class="fas fa-play-circle"></i>
+                        Start Test Now
+                    </button>
+
+                    <a data-scroll="contact">
+                        <button class="btn-ghost">
+                            Learn More
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </a>
+
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-image-wrapper">
+                    <div class="main-visual">
+                        <i class="fas fa-microphone"></i>
+                    </div>
+                    <div class="floating-card card-1">
+                        <i class="fas fa-check-circle" style="color: #10B981;"></i>
+                    </div>
+                    <div class="floating-card card-2">
+                        <i class="fas fa-star" style="color: #FFA500;"></i>
+                    </div>
+                    <div class="floating-card card-3">
+                        <i class="fas fa-chart-line" style="color: #4F46E5;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">How It Works</span>
+                <h2 class="section-title">Three Simple Steps</h2>
+                <p class="section-description">Start practicing in minutes and see immediate improvements in your
+                    speaking skills</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon">
+                        <i class="fas fa-microphone-alt"></i>
+                    </div>
+                    <h3>Speak with AI</h3>
+                    <p>Engage in realistic conversations with our advanced AI agent. Answer questions just like in the
+                        actual IELTS speaking test with natural voice recognition.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Get Instant Feedback</h3>
+                    <p>Receive detailed analysis on fluency, pronunciation, grammar, vocabulary, and coherence. Our AI
+                        evaluates every aspect of your performance instantly.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3>Improve & Excel</h3>
+                    <p>Track your progress with comprehensive reports. Get personalized recommendations and practice
+                        strategies to achieve your target band score.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feedback Section -->
+    <section class="feedback" id="feedback">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Testimonials</span>
+                <h2 class="section-title">Loved by Thousands</h2>
+                <p class="section-description">See what our users have to say about their experience</p>
+            </div>
+
+            <div class="testimonials-wrapper">
+                <div class="testimonial active">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <p class="testimonial-text">"This platform transformed my IELTS preparation. The AI feedback was
+                        incredibly detailed and helped me achieve a band 8 in speaking. I practiced every day for two
+                        weeks and the results were amazing!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SM</div>
+                        <div class="author-info">
+                            <h4>Sarah Martinez</h4>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <p class="testimonial-text">"The instant feedback feature is revolutionary. I could practice
+                        anytime, anywhere, and the AI was incredibly accurate in evaluating my pronunciation. It's like
+                        having a personal IELTS tutor available 24/7."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JP</div>
+                        <div class="author-info">
+                            <h4>James Park</h4>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <p class="testimonial-text">"I was nervous about the speaking test, but this platform gave me the
+                        confidence I needed. The realistic simulations and constructive feedback made all the difference
+                        in my preparation journey."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AL</div>
+                        <div class="author-info">
+                            <h4>Amira Lee</h4>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial">
+                    <i class="fas fa-quote-left quote-icon"></i>
+                    <p class="testimonial-text">"Exceptional platform! The AI understands context perfectly and provides
+                        feedback that's better than some human tutors. My fluency improved dramatically in just three
+                        weeks of consistent practice."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RK</div>
+                        <div class="author-info">
+                            <h4>Raj Kumar</h4>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-controls">
+                    <button class="control-btn" id="prevBtn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="control-btn" id="nextBtn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-number">10,000+</div>
+                    <div class="stat-label">Active Users</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-smile"></i>
+                    </div>
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Satisfaction Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="stat-number">AI</div>
+                    <div class="stat-label">Powered Evaluation</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Contact Us</span>
+                <h2 class="section-title">Get in Touch</h2>
+                <p class="section-description">Have questions? We'd love to hear from you. Send us a message and we'll
+                    respond as soon as possible.</p>
+            </div>
+            <div class="contact-wrapper">
+                <form class="contact-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="your.email@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" placeholder="Tell us how we can help you..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>SpeakMate-AI </h3>
+                    <p>Master your IELTS speaking test with our advanced AI-powered platform. Practice, improve, and
+                        achieve your target band score.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Reviews</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Privacy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 SpeakMate-AI . All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="landing.js"></script>
+</body>
+
+</html>

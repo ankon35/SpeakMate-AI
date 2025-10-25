@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpeakMate-AI - Authentication</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="main-container" id="mainContainer">
+        <!-- Left Side - Authentication Forms -->
+        <div class="auth-section">
+            <div class="auth-card">
+                <!-- Login Page -->
+                <div id="login" class="page active">
+                    <h2>Welcome Back</h2>
+                    <p class="subtitle">Login to your SpeakMate-AI account</p>
+                    
+                    <form id="loginForm" onsubmit="handleLogin(event)">
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" id="loginEmail" placeholder="you@example.com" required>
+                            <div class="error-message" id="loginEmailError"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Password</label>
+                            <div class="input-wrapper">
+                                <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                                <i class="fas fa-eye-slash eye-icon" onclick="togglePassword('loginPassword', this)"></i>
+                            </div>
+                            <div class="error-message" id="loginPasswordError"></div>
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="rememberMe">
+                            <label for="rememberMe">Remember me</label>
+                        </div>
+                        
+                        <button type="submit" class="btn">Login</button>
+                    </form>
+                    
+                    <div class="link-text">
+                        <a href="#" onclick="showPage('forgot')">Forgot Password?</a>
+                    </div>
+                    
+                    <div class="divider">or</div>
+                    
+                    <div class="link-text">
+                        Don't have an account? <a href="#" onclick="showPage('signup')">Sign Up</a>
+                    </div>
+                </div>
+
+                <!-- Signup Page -->
+                <div id="signup" class="page">
+                    <h2>Create Account</h2>
+                    <p class="subtitle">Join SpeakMate-AI today</p>
+                    
+                    <form id="signupForm" onsubmit="handleSignup(event)">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" id="signupName" placeholder="John Doe" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" id="signupEmail" placeholder="you@example.com" required>
+                            <div class="error-message" id="signupEmailError"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Password</label>
+                            <div class="input-wrapper">
+                                <input type="password" id="signupPassword" placeholder="Create a strong password" required oninput="checkPasswordStrength(this.value, 'strengthBar')">
+                                <i class="fas fa-eye-slash eye-icon" onclick="togglePassword('signupPassword', this)"></i>
+                            </div>
+                            <div class="password-strength">
+                                <div class="password-strength-bar" id="strengthBar"></div>
+                            </div>
+                            <div class="error-message" id="signupPasswordError"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <div class="input-wrapper">
+                                <input type="password" id="signupConfirmPassword" placeholder="Re-enter your password" required>
+                                <i class="fas fa-eye-slash eye-icon" onclick="togglePassword('signupConfirmPassword', this)"></i>
+                            </div>
+                            <div class="error-message" id="confirmPasswordError"></div>
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="termsAgree" required>
+                            <label for="termsAgree">I agree to the Terms & Conditions</label>
+                        </div>
+                        
+                        <button type="submit" class="btn">Sign Up</button>
+                    </form>
+                    
+                    <div class="link-text">
+                        Already have an account? <a href="#" onclick="showPage('login')">Login</a>
+                    </div>
+                </div>
+
+                <!-- Signup OTP Verification -->
+                <div id="signupOtp" class="page">
+                    <h2>Verify Your Email</h2>
+                    <p class="subtitle">Enter the 6-digit code sent to <strong id="signupEmailDisplay"></strong></p>
+                    
+                    <div class="otp-container">
+                        <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 0)">
+                        <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 1)">
+                        <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 2)">
+                        <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 3)">
+                        <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 4)">
+                        <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 5)">
+                    </div>
+                    
+                    <div class="timer" id="signupTimer">Time remaining: <span id="signupTimerCount">60</span>s</div>
+                    
+                    <button class="btn" onclick="verifySignupOtp()">Verify OTP</button>
+                    <button class="btn btn-secondary" id="signupResendBtn" onclick="resendSignupOtp()" disabled>Resend OTP</button>
+                    
+                    <div class="link-text">
+                        <a href="#" onclick="showPage('signup')">← Back to Sign Up</a>
+                    </div>
+                </div>
+
+                <!-- Signup Success -->
+                <div id="signupSuccess" class="page">
+                    <div class="success-message show">
+                        <h3>✅ Account Created Successfully!</h3>
+                        <p>Your SpeakMate-AI account has been created and verified.</p>
+                    </div>
+                    
+                    <button class="btn" onclick="showPage('login')">Continue to Login</button>
+                </div>
+
+                <!-- Forgot Password -->
+                <div id="forgot" class="page">
+                    <h2>Reset Password</h2>
+                    <p class="subtitle">Enter your email to receive a verification code</p>
+                    
+                    <form id="forgotForm" onsubmit="handleForgotPassword(event)">
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" id="forgotEmail" placeholder="you@example.com" required>
+                            <div class="error-message" id="forgotEmailError"></div>
+                        </div>
+                        
+                        <button type="submit" class="btn">Send Verification Code</button>
+                    </form>
+                    
+                    <div class="link-text">
+                        <a href="#" onclick="showPage('login')">← Back to Login</a>
+                    </div>
+                </div>
+
+                <!-- Forgot Password OTP -->
+                <div id="forgotOtp" class="page">
+                    <h2>Enter Verification Code</h2>
+                    <p class="subtitle">Code sent to <strong id="forgotEmailDisplay"></strong></p>
+                    
+                    <div class="otp-container">
+                        <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 0)">
+                        <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 1)">
+                        <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 2)">
+                        <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 3)">
+                        <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 4)">
+                        <input type="text" class="otp-input" maxlength="1" oninput="moveToNext(this, 5)">
+                    </div>
+                    
+                    <div class="timer" id="forgotTimer">Time remaining: <span id="forgotTimerCount">60</span>s</div>
+                    
+                    <button class="btn" onclick="verifyForgotOtp()">Verify Code</button>
+                    <button class="btn btn-secondary" id="forgotResendBtn" onclick="resendForgotOtp()" disabled>Resend Code</button>
+                    
+                    <div class="link-text">
+                        <a href="#" onclick="showPage('forgot')">← Back</a>
+                    </div>
+                </div>
+
+                <!-- Reset Password -->
+                <div id="resetPassword" class="page">
+                    <h2>Create New Password</h2>
+                    <p class="subtitle">Enter your new password</p>
+                    
+                    <form id="resetForm" onsubmit="handleResetPassword(event)">
+                        <div class="form-group">
+                            <label>New Password</label>
+                            <div class="input-wrapper">
+                                <input type="password" id="newPassword" placeholder="Enter new password" required oninput="checkPasswordStrength(this.value, 'resetStrengthBar')">
+                                <i class="fas fa-eye-slash eye-icon" onclick="togglePassword('newPassword', this)"></i>
+                            </div>
+                            <div class="password-strength">
+                                <div class="password-strength-bar" id="resetStrengthBar"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Confirm New Password</label>
+                            <div class="input-wrapper">
+                                <input type="password" id="confirmNewPassword" placeholder="Re-enter new password" required>
+                                <i class="fas fa-eye-slash eye-icon" onclick="togglePassword('confirmNewPassword', this)"></i>
+                            </div>
+                            <div class="error-message" id="resetPasswordError"></div>
+                        </div>
+                        
+                        <button type="submit" class="btn">Reset Password</button>
+                    </form>
+                </div>
+
+                <!-- Reset Success -->
+                <div id="resetSuccess" class="page">
+                    <div class="success-message show">
+                        <h3>🔒 Password Reset Successful!</h3>
+                        <p>Your password has been successfully reset.</p>
+                    </div>
+                    
+                    <button class="btn" onclick="showPage('login')">Continue to Login</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Branding -->
+        <div class="branding-section">
+            <div class="branding-content">
+                <div class="brand-logo">SpeakMate-AI</div>
+                <h1 class="brand-tagline">Your AI Communication Partner</h1>
+                <p class="brand-description">
+                    Transform the way you communicate with advanced AI technology. 
+                    Practice conversations, improve your speaking skills, and connect better with the world.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+</html>
