@@ -1,0 +1,13 @@
+livekit-agents
+python-dotenv
+openai
+assemblyai
+livekit-plugins-assemblyai
+livekit-plugins-openai
+livekit-plugins-noise-cancellation
+livekit-plugins-silero
+livekit-plugins-google
+langdetect
+fastapi
+uvicorn[standard]
+livekit
