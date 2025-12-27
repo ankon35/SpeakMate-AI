@@ -1,0 +1,26 @@
+[
+  {
+    "timestamp": "2025-12-10T03:41:51.051125",
+    "role": "user",
+    "content": "How are you",
+    "language": "en"
+  },
+  {
+    "timestamp": "2025-12-10T03:42:00.166487",
+    "role": "agent",
+    "content": "As an AI, I don't experience emotions in the same way humans do, but I'm functioning optimally and ready to assist you. How can I help you today?\n",
+    "language": "en"
+  },
+  {
+    "timestamp": "2025-12-10T03:42:13.204459",
+    "role": "agent",
+    "content": "Great! So, what can I do for you? Do you have any questions I can answer, tasks I can help with, or anything else on your mind?\n",
+    "language": "en"
+  },
+  {
+    "timestamp": "2025-12-10T03:42:19.174866",
+    "role": "user",
+    "content": "I need to know about the life kit life agent.",
+    "language": "en"
+  }
+]

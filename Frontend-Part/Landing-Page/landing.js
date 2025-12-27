@@ -233,7 +233,7 @@ document.querySelectorAll('.btn').forEach(btn => {
 });
 
 document.getElementById("loginBtn").onclick = function () {
-    window.location.href = "/SpeakMate-AI/Frontend-Part/Login-Page/login.html";
+    window.location.href = "/Frontend-Part/Login-Page/login.html";
 };
 
 document.getElementById("signupBtn").onclick = function () {
@@ -241,7 +241,7 @@ document.getElementById("signupBtn").onclick = function () {
     const token = generateUniqueToken();
 
     // Construct the signup URL with the mode set to 'signup' and include the token
-    const signupUrl = "/SpeakMate-AI/Frontend-Part/Login-Page/login.html?mode=signup&token=" + token;
+    const signupUrl = "/Frontend-Part/Login-Page/login.html?mode=signup&token=" + token;
 
     // Redirect to the login-signup page with the mode and token
     window.location.href = signupUrl;

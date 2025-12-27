@@ -1,5 +1,3 @@
-# get_token.py
-
 import os
 import asyncio
 from livekit import api

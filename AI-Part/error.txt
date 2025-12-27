@@ -1,5 +1,0 @@
-(venv) PS C:\Users\Arafat Hossain Ankon\OneDrive\Documents\SpeakMate-AI\AI-Part> python agent.py console
-Traceback (most recent call last):
-  File "C:\Users\Arafat Hossain Ankon\OneDrive\Documents\SpeakMate-AI\AI-Part\agent.py", line 26, in <module>
-    raise ValueError(
-ValueError: GOOGLE_APPLICATION_CREDENTIALS environment variable not set. Please follow the instructions at https://cloud.google.com/docs/authentication/external/set-up-adc to set up your credentials.

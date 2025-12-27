@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Speaking Test - Registration</title>
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --secondary: #6366F1;
+            --accent: #22D3EE;
+            --dark: #0F172A;
+            --gray: #64748B;
+            --light: #F8FAFC;
+            --success: #10B981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .bubble {
+            position: fixed;
+            bottom: -100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: rise linear infinite;
+        }
+
+        @keyframes rise {
+            to {
+                bottom: 110vh;
+                transform: translateX(var(--drift)) rotate(360deg);
+            }
+        }
+
+        .bubble:nth-child(1) {
+            left: 10%;
+            width: 80px;
+            height: 80px;
+            animation-duration: 15s;
+            animation-delay: 0s;
+            --drift: -50px;
+        }
+
+        .bubble:nth-child(2) {
+            left: 25%;
+            width: 50px;
+            height: 50px;
+            animation-duration: 12s;
+            animation-delay: 2s;
+            --drift: 30px;
+        }
+
+        .bubble:nth-child(3) {
+            left: 40%;
+            width: 100px;
+            height: 100px;
+            animation-duration: 18s;
+            animation-delay: 4s;
+            --drift: -80px;
+        }
+
+        .bubble:nth-child(4) {
+            left: 55%;
+            width: 60px;
+            height: 60px;
+            animation-duration: 14s;
+            animation-delay: 1s;
+            --drift: 60px;
+        }
+
+        .bubble:nth-child(5) {
+            left: 70%;
+            width: 90px;
+            height: 90px;
+            animation-duration: 16s;
+            animation-delay: 3s;
+            --drift: -40px;
+        }
+
+        .bubble:nth-child(6) {
+            left: 85%;
+            width: 70px;
+            height: 70px;
+            animation-duration: 13s;
+            animation-delay: 5s;
+            --drift: 20px;
+        }
+
+        .bubble:nth-child(7) {
+            left: 15%;
+            width: 40px;
+            height: 40px;
+            animation-duration: 11s;
+            animation-delay: 6s;
+            --drift: -30px;
+        }
+
+        .bubble:nth-child(8) {
+            left: 50%;
+            width: 55px;
+            height: 55px;
+            animation-duration: 17s;
+            animation-delay: 2.5s;
+            --drift: 70px;
+        }
+
+        .registration-container {
+            width: 100%;
+            max-width: 580px;
+            animation: fadeInScale 0.6s ease;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .registration-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 60px 50px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .logo-icon {
+            width: 90px;
+            height: 90px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 44px;
+            margin-bottom: 24px;
+            box-shadow: 0 12px 35px rgba(79, 70, 229, 0.35);
+        }
+
+        .header-section h1 {
+            font-size: 32px;
+            color: var(--dark);
+            margin-bottom: 10px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .header-section p {
+            color: var(--gray);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .form-section {
+            margin-bottom: 32px;
+        }
+
+        .input-group {
+            margin-bottom: 28px;
+        }
+
+        .input-group label {
+            display: block;
+            color: var(--dark);
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 14px;
+            letter-spacing: 0.3px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            z-index: 1;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 18px 18px 18px 54px;
+            border: 2px solid #E2E8F0;
+            background: white;
+            border-radius: 14px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            color: var(--dark);
+        }
+
+        .input-group input::placeholder {
+            color: #94A3B8;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+        }
+
+        .input-group input.error {
+            border-color: #EF4444;
+            background: #FEF2F2;
+        }
+
+        .error-msg {
+            color: #EF4444;
+            font-size: 13px;
+            margin-top: 8px;
+            display: none;
+            font-weight: 500;
+        }
+
+        .error-msg.show {
+            display: block;
+        }
+
+        .info-banner {
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.08), rgba(99, 102, 241, 0.08));
+            border-left: 4px solid var(--primary);
+            padding: 16px 20px;
+            border-radius: 12px;
+            margin-bottom: 32px;
+        }
+
+        .info-banner p {
+            color: var(--dark);
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            box-shadow: 0 12px 35px rgba(79, 70, 229, 0.4);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 45px rgba(79, 70, 229, 0.5);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 28px;
+            color: var(--gray);
+            font-size: 13px;
+        }
+
+        /* Success Screen */
+        .success-screen {
+            display: none;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 70px 50px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 580px;
+            margin: 0 auto;
+        }
+
+        .success-screen.show {
+            display: block;
+            animation: scaleIn 0.5s ease;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.85);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .success-icon {
+            width: 110px;
+            height: 110px;
+            background: linear-gradient(135deg, var(--success), #059669);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 56px;
+            color: white;
+            margin-bottom: 32px;
+            box-shadow: 0 15px 40px rgba(16, 185, 129, 0.4);
+        }
+
+        .success-screen h2 {
+            font-size: 34px;
+            color: var(--dark);
+            margin-bottom: 16px;
+            font-weight: 800;
+        }
+
+        .success-screen p {
+            font-size: 16px;
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .candidate-details {
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.06), rgba(99, 102, 241, 0.06));
+            padding: 24px;
+            border-radius: 16px;
+            margin-top: 32px;
+            text-align: left;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 14px;
+        }
+
+        .detail-value {
+            color: var(--gray);
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .registration-card,
+            .success-screen {
+                padding: 40px 30px;
+            }
+
+            .header-section h1 {
+                font-size: 26px;
+            }
+
+            .logo-icon {
+                width: 75px;
+                height: 75px;
+                font-size: 36px;
+            }
+
+            .input-group input {
+                padding: 16px 16px 16px 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+
+    <!-- Registration Form -->
+    <div class="registration-container" id="registrationContainer">
+        <div class="registration-card">
+            <div class="header-section">
+                <div class="logo-icon">🎙️</div>
+                <h1>Speaking Test with AI</h1>
+                <p>Advanced Voice Assessment Platform</p>
+            </div>
+
+            <form id="registrationForm" onsubmit="handleSubmit(event)">
+                <div class="form-section">
+                    <div class="input-group">
+                        <label>Full Name</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">👤</span>
+                            <input 
+                                type="text" 
+                                id="fullName" 
+                                placeholder="Enter your full name"
+                                autocomplete="name">
+                        </div>
+                        <div class="error-msg" id="nameError">Please enter your full name</div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Email Address</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">✉️</span>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                placeholder="Enter your email address"
+                                autocomplete="email">
+                        </div>
+                        <div class="error-msg" id="emailError">Please enter a valid email address</div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Candidate ID</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">🆔</span>
+                            <input 
+                                type="text" 
+                                id="candidateId" 
+                                placeholder="Enter your candidate ID"
+                                autocomplete="off">
+                        </div>
+                        <div class="error-msg" id="idError">Please enter your candidate ID</div>
+                    </div>
+                </div>
+
+                <!-- <div class="info-banner">
+                    <p>📌 Your information will be used solely for assessment purposes and will be kept confidential in accordance with our privacy policy.</p>
+                </div> -->
+
+                <button type="submit" class="submit-btn">Continue to Assessment</button>
+
+                <div class="footer-note">
+                    By continuing, you agree to our terms of service
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Screen -->
+    <div class="success-screen" id="successScreen">
+        <div class="success-icon">✓</div>
+        <h2>Registration Complete!</h2>
+        <p>Your information has been successfully recorded.</p>
+        <p>The assessment will begin shortly.</p>
+
+        <div class="candidate-details" id="candidateDetails">
+            <div class="detail-row">
+                <span class="detail-label">Full Name</span>
+                <span class="detail-value" id="displayName"></span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Email</span>
+                <span class="detail-value" id="displayEmail"></span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Candidate ID</span>
+                <span class="detail-value" id="displayId"></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const id = document.getElementById('candidateId').value.trim();
+            
+            let isValid = true;
+
+            // Validate name
+            if (!name) {
+                document.getElementById('fullName').classList.add('error');
+                document.getElementById('nameError').classList.add('show');
+                isValid = false;
+            } else {
+                document.getElementById('fullName').classList.remove('error');
+                document.getElementById('nameError').classList.remove('show');
+            }
+
+            // Validate email
+            if (!email || !validateEmail(email)) {
+                document.getElementById('email').classList.add('error');
+                document.getElementById('emailError').classList.add('show');
+                isValid = false;
+            } else {
+                document.getElementById('email').classList.remove('error');
+                document.getElementById('emailError').classList.remove('show');
+            }
+
+            // Validate ID
+            if (!id) {
+                document.getElementById('candidateId').classList.add('error');
+                document.getElementById('idError').classList.add('show');
+                isValid = false;
+            } else {
+                document.getElementById('candidateId').classList.remove('error');
+                document.getElementById('idError').classList.remove('show');
+            }
+
+            if (!isValid) return;
+
+            // Show success screen
+            document.getElementById('registrationContainer').style.display = 'none';
+            document.getElementById('successScreen').classList.add('show');
+            
+            // Display candidate information
+            document.getElementById('displayName').textContent = name;
+            document.getElementById('displayEmail').textContent = email;
+            document.getElementById('displayId').textContent = id;
+
+            // Store data (you can send this to a server or use it as needed)
+            const candidateData = {
+                name: name,
+                email: email,
+                id: id,
+                timestamp: new Date().toISOString()
+            };
+            
+            console.log('Candidate registered:', candidateData);
+        }
+    </script>
+</body>
+</html>

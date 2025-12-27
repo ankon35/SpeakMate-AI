@@ -397,7 +397,7 @@ function handleLogin(e) {
     }
 
     alert('Login successful!');
-    window.location.href = "/SpeakMate-AI/Frontend-Part/Landing-Page/index.html";
+    window.location.href = "/Frontend-Part/Landing-Page/index.html";
 }
 
 // Handle Signup
