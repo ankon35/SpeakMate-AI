@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Speaking Test - Registration</title>
+    <title>IELTS Speaking Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/livekit-client@2.5.8/dist/livekit-client.umd.min.js"></script>
     <style>
         :root {
             --primary: #4F46E5;
@@ -13,6 +14,7 @@
             --gray: #64748B;
             --light: #F8FAFC;
             --success: #10B981;
+            --warning: #F59E0B;
         }
 
         * {
@@ -49,150 +51,79 @@
             }
         }
 
-        .bubble:nth-child(1) {
-            left: 10%;
-            width: 80px;
-            height: 80px;
-            animation-duration: 15s;
-            animation-delay: 0s;
-            --drift: -50px;
-        }
+        .bubble:nth-child(1) { left: 10%; width: 80px; height: 80px; animation-duration: 15s; animation-delay: 0s; --drift: -50px; }
+        .bubble:nth-child(2) { left: 25%; width: 50px; height: 50px; animation-duration: 12s; animation-delay: 2s; --drift: 30px; }
+        .bubble:nth-child(3) { left: 40%; width: 100px; height: 100px; animation-duration: 18s; animation-delay: 4s; --drift: -80px; }
+        .bubble:nth-child(4) { left: 55%; width: 60px; height: 60px; animation-duration: 14s; animation-delay: 1s; --drift: 60px; }
+        .bubble:nth-child(5) { left: 70%; width: 90px; height: 90px; animation-duration: 16s; animation-delay: 3s; --drift: -40px; }
+        .bubble:nth-child(6) { left: 85%; width: 70px; height: 70px; animation-duration: 13s; animation-delay: 5s; --drift: 20px; }
 
-        .bubble:nth-child(2) {
-            left: 25%;
-            width: 50px;
-            height: 50px;
-            animation-duration: 12s;
-            animation-delay: 2s;
-            --drift: 30px;
-        }
-
-        .bubble:nth-child(3) {
-            left: 40%;
-            width: 100px;
-            height: 100px;
-            animation-duration: 18s;
-            animation-delay: 4s;
-            --drift: -80px;
-        }
-
-        .bubble:nth-child(4) {
-            left: 55%;
-            width: 60px;
-            height: 60px;
-            animation-duration: 14s;
-            animation-delay: 1s;
-            --drift: 60px;
-        }
-
-        .bubble:nth-child(5) {
-            left: 70%;
-            width: 90px;
-            height: 90px;
-            animation-duration: 16s;
-            animation-delay: 3s;
-            --drift: -40px;
-        }
-
-        .bubble:nth-child(6) {
-            left: 85%;
-            width: 70px;
-            height: 70px;
-            animation-duration: 13s;
-            animation-delay: 5s;
-            --drift: 20px;
-        }
-
-        .bubble:nth-child(7) {
-            left: 15%;
-            width: 40px;
-            height: 40px;
-            animation-duration: 11s;
-            animation-delay: 6s;
-            --drift: -30px;
-        }
-
-        .bubble:nth-child(8) {
-            left: 50%;
-            width: 55px;
-            height: 55px;
-            animation-duration: 17s;
-            animation-delay: 2.5s;
-            --drift: 70px;
-        }
-
-        .registration-container {
+        .app-container {
             width: 100%;
-            max-width: 580px;
-            animation: fadeInScale 0.6s ease;
+            max-width: 1400px;
         }
 
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
 
-        .registration-card {
+
+        /* User Info Section */
+        .user-info-card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            padding: 60px 50px;
+            padding: 50px;
             border-radius: 24px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            margin: 0 auto;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .header-section {
+        .user-info-card.hidden {
+            opacity: 0;
+            transform: scale(0.9);
+            display: none;
+        }
+
+        .logo {
             text-align: center;
-            margin-bottom: 48px;
+            margin-bottom: 40px;
         }
 
         .logo-icon {
-            width: 90px;
-            height: 90px;
+            width: 80px;
+            height: 80px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 22px;
+            border-radius: 20px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 44px;
-            margin-bottom: 24px;
-            box-shadow: 0 12px 35px rgba(79, 70, 229, 0.35);
+            font-size: 40px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(79, 70, 229, 0.3);
         }
 
-        .header-section h1 {
-            font-size: 32px;
+        .logo h1 {
+            font-size: 28px;
             color: var(--dark);
-            margin-bottom: 10px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
+            margin-bottom: 8px;
         }
 
-        .header-section p {
+        .logo p {
             color: var(--gray);
-            font-size: 15px;
-            line-height: 1.6;
-        }
-
-        .form-section {
-            margin-bottom: 32px;
+            font-size: 14px;
         }
 
         .input-group {
-            margin-bottom: 28px;
+            margin-bottom: 24px;
         }
 
         .input-group label {
             display: block;
             color: var(--dark);
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-size: 14px;
-            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .input-wrapper {
@@ -201,112 +132,598 @@
 
         .input-icon {
             position: absolute;
-            left: 18px;
+            left: 16px;
             top: 50%;
             transform: translateY(-50%);
+            color: var(--gray);
             font-size: 20px;
-            z-index: 1;
         }
 
         .input-group input {
             width: 100%;
-            padding: 18px 18px 18px 54px;
-            border: 2px solid #E2E8F0;
-            background: white;
-            border-radius: 14px;
+            padding: 16px 16px 16px 50px;
+            border: 2px solid transparent;
+            background: var(--light);
+            border-radius: 12px;
             font-size: 16px;
             transition: all 0.3s ease;
-            color: var(--dark);
-        }
-
-        .input-group input::placeholder {
-            color: #94A3B8;
         }
 
         .input-group input:focus {
             outline: none;
             border-color: var(--primary);
+            background: white;
             box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
         }
 
         .input-group input.error {
             border-color: #EF4444;
-            background: #FEF2F2;
         }
 
         .error-msg {
             color: #EF4444;
             font-size: 13px;
-            margin-top: 8px;
+            margin-top: 6px;
             display: none;
-            font-weight: 500;
         }
 
         .error-msg.show {
             display: block;
         }
 
-        .info-banner {
-            background: linear-gradient(135deg, rgba(79, 70, 229, 0.08), rgba(99, 102, 241, 0.08));
-            border-left: 4px solid var(--primary);
-            padding: 16px 20px;
-            border-radius: 12px;
-            margin-bottom: 32px;
-        }
-
-        .info-banner p {
-            color: var(--dark);
-            font-size: 14px;
-            line-height: 1.6;
-            margin: 0;
-        }
-
-        .submit-btn {
+        .start-btn {
             width: 100%;
-            padding: 20px;
+            padding: 18px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             border: none;
-            border-radius: 14px;
-            font-size: 17px;
+            border-radius: 12px;
+            font-size: 18px;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
-            letter-spacing: 1.2px;
-            box-shadow: 0 12px 35px rgba(79, 70, 229, 0.4);
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(79, 70, 229, 0.4);
         }
 
-        .submit-btn:hover {
+        .start-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 16px 45px rgba(79, 70, 229, 0.5);
+            box-shadow: 0 15px 40px rgba(79, 70, 229, 0.5);
         }
 
-        .submit-btn:active {
-            transform: translateY(-1px);
+        .start-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
         }
 
-        .footer-note {
+        /* Connection Status */
+        .connection-status {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 8px;
             text-align: center;
-            margin-top: 28px;
-            color: var(--gray);
-            font-size: 13px;
+            font-size: 14px;
+            display: none;
         }
 
-        /* Success Screen */
-        .success-screen {
+        .connection-status.show {
+            display: block;
+        }
+
+        .connection-status.connecting {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+
+        .connection-status.connected {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+
+        .connection-status.error {
+            background: rgba(239, 68, 68, 0.2);
+            color: #EF4444;
+        }
+
+        /* Test Interface */
+        .test-container {
+            display: none;
+            opacity: 0;
+        }
+
+        .test-container.active {
+            display: block;
+            animation: fadeInUp 0.6s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .top-bar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 24px 32px;
+            border-radius: 20px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .candidate-info h2 {
+            font-size: 24px;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
+
+        .candidate-info span {
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .part-indicator {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .voice-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+
+        .panel-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .recording-indicator {
+            width: 16px;
+            height: 16px;
+            background: #EF4444;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .recording-indicator.inactive {
+            background: var(--gray);
+            animation: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.3);
+            }
+        }
+
+        .panel-header h3 {
+            font-size: 20px;
+            color: var(--dark);
+        }
+
+        .ai-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .wave-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.05), rgba(99, 102, 241, 0.05));
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wave-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            height: 100%;
+        }
+
+        .wave-bar {
+            width: 6px;
+            background: var(--dark);
+            border-radius: 10px;
+            animation: wave 1s ease-in-out infinite;
+        }
+
+        .wave-bar:nth-child(1) { animation-delay: 0s; height: 40px; }
+        .wave-bar:nth-child(2) { animation-delay: 0.1s; height: 60px; }
+        .wave-bar:nth-child(3) { animation-delay: 0.2s; height: 80px; }
+        .wave-bar:nth-child(4) { animation-delay: 0.3s; height: 100px; }
+        .wave-bar:nth-child(5) { animation-delay: 0.4s; height: 120px; }
+        .wave-bar:nth-child(6) { animation-delay: 0.5s; height: 140px; }
+        .wave-bar:nth-child(7) { animation-delay: 0.6s; height: 120px; }
+        .wave-bar:nth-child(8) { animation-delay: 0.7s; height: 100px; }
+        .wave-bar:nth-child(9) { animation-delay: 0.8s; height: 80px; }
+        .wave-bar:nth-child(10) { animation-delay: 0.9s; height: 60px; }
+        .wave-bar:nth-child(11) { animation-delay: 1s; height: 40px; }
+
+        @keyframes wave {
+            0%, 100% {
+                transform: scaleY(0.5);
+                opacity: 0.7;
+            }
+            50% {
+                transform: scaleY(1);
+                opacity: 1;
+            }
+        }
+
+        /* Cue Card Styles */
+        .cue-card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            border: 3px solid var(--warning);
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+
+        .cue-card.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cue-card-header {
+            background: linear-gradient(135deg, var(--warning), #F97316);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .cue-card-header h4 {
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .cue-card-header p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .cue-card-topic {
+            background: rgba(245, 158, 11, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            border-left: 4px solid var(--warning);
+        }
+
+        .cue-card-topic h5 {
+            color: var(--warning);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .cue-card-topic p {
+            color: var(--dark);
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .cue-card-points {
+            margin-bottom: 24px;
+        }
+
+        .cue-card-points h5 {
+            color: var(--dark);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .cue-card-points ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .cue-card-points li {
+            padding: 12px 16px;
+            background: var(--light);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            color: var(--dark);
+            font-size: 15px;
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .cue-card-points li:before {
+            content: '•';
+            position: absolute;
+            left: 16px;
+            color: var(--warning);
+            font-size: 24px;
+            line-height: 1;
+        }
+
+        .cue-card-footer {
+            background: rgba(79, 70, 229, 0.1);
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .cue-card-footer p {
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .ai-message {
+            background: rgba(79, 70, 229, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .ai-message-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .ai-message-text {
+            color: var(--dark);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .finish-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--dark), var(--dark));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .finish-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.4);
+        }
+
+        .finish-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .transcript-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+        }
+
+        .transcript-panel h3 {
+            color: var(--dark);
+            font-size: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .transcript-content {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .transcript-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .transcript-content::-webkit-scrollbar-thumb {
+            background: var(--gray);
+            border-radius: 10px;
+        }
+
+        .transcript-entry {
+            margin-bottom: 20px;
+            animation: fadeInEntry 0.4s ease;
+        }
+
+        @keyframes fadeInEntry {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .transcript-entry.ai-entry {
+            border-left: 4px solid var(--primary);
+            background: linear-gradient(90deg, rgba(79, 70, 229, 0.08), transparent);
+        }
+
+        .transcript-entry.user-entry {
+            border-left: 4px solid var(--accent);
+            background: linear-gradient(90deg, rgba(34, 211, 238, 0.08), transparent);
+        }
+
+        .entry-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .entry-speaker {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .transcript-entry.ai-entry .entry-speaker {
+            color: var(--primary);
+        }
+
+        .transcript-entry.user-entry .entry-speaker {
+            color: var(--accent);
+        }
+
+        .speaker-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .transcript-entry.ai-entry .speaker-icon {
+            background: var(--primary);
+            color: white;
+        }
+
+        .transcript-entry.user-entry .speaker-icon {
+            background: var(--accent);
+            color: var(--dark);
+        }
+
+        .entry-time {
+            font-size: 11px;
+            color: var(--gray);
+            font-family: 'Courier New', monospace;
+        }
+
+        .entry-content {
+            padding: 16px;
+            color: var(--dark);
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        .download-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(79, 70, 229, 0.5);
+        }
+
+        /* Completion Screen */
+        .completion-screen {
             display: none;
             text-align: center;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            padding: 70px 50px;
+            padding: 80px 60px;
             border-radius: 24px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 580px;
+            max-width: 600px;
             margin: 0 auto;
         }
 
-        .success-screen.show {
+        .completion-screen.show {
             display: block;
             animation: scaleIn 0.5s ease;
         }
@@ -314,7 +731,7 @@
         @keyframes scaleIn {
             from {
                 opacity: 0;
-                transform: scale(0.85);
+                transform: scale(0.8);
             }
             to {
                 opacity: 1;
@@ -323,84 +740,52 @@
         }
 
         .success-icon {
-            width: 110px;
-            height: 110px;
-            background: linear-gradient(135deg, var(--success), #059669);
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--success), var(--success));
             border-radius: 50%;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 56px;
+            font-size: 60px;
             color: white;
             margin-bottom: 32px;
             box-shadow: 0 15px 40px rgba(16, 185, 129, 0.4);
         }
 
-        .success-screen h2 {
-            font-size: 34px;
+        .completion-screen h2 {
+            font-size: 36px;
             color: var(--dark);
             margin-bottom: 16px;
-            font-weight: 800;
         }
 
-        .success-screen p {
-            font-size: 16px;
+        .completion-screen p {
+            font-size: 18px;
             color: var(--gray);
-            line-height: 1.7;
-            margin-bottom: 12px;
+            line-height: 1.6;
         }
 
-        .candidate-details {
-            background: linear-gradient(135deg, rgba(79, 70, 229, 0.06), rgba(99, 102, 241, 0.06));
-            padding: 24px;
-            border-radius: 16px;
-            margin-top: 32px;
-            text-align: left;
+        @media (max-width: 1024px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
-        .detail-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-        }
-
-        .detail-row:last-child {
-            border-bottom: none;
-        }
-
-        .detail-label {
-            font-weight: 600;
-            color: var(--dark);
-            font-size: 14px;
-        }
-
-        .detail-value {
-            color: var(--gray);
-            font-size: 14px;
-            font-family: 'Courier New', monospace;
-        }
-
-        /* Responsive */
-        @media (max-width: 640px) {
-            .registration-card,
-            .success-screen {
-                padding: 40px 30px;
+        @media (max-width: 768px) {
+            .user-info-card {
+                padding: 32px;
             }
 
-            .header-section h1 {
-                font-size: 26px;
+            .top-bar {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
             }
 
-            .logo-icon {
-                width: 75px;
-                height: 75px;
-                font-size: 36px;
-            }
-
-            .input-group input {
-                padding: 16px 16px 16px 50px;
+            .voice-panel,
+            .transcript-panel {
+                height: 500px;
+                padding: 24px;
             }
         }
     </style>
@@ -412,112 +797,320 @@
     <div class="bubble"></div>
     <div class="bubble"></div>
     <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-
-    <!-- Registration Form -->
-    <div class="registration-container" id="registrationContainer">
-        <div class="registration-card">
-            <div class="header-section">
+    
+    <div class="app-container">
+        <!-- User Info Card -->
+        <div class="user-info-card" id="userInfoCard">
+            <div class="logo">
                 <div class="logo-icon">🎙️</div>
-                <h1>Speaking Test with AI</h1>
-                <p>Advanced Voice Assessment Platform</p>
+                <h1>IELTS Speaking Test</h1>
+                <p>Live AI Voice Assessment</p>
             </div>
 
-            <form id="registrationForm" onsubmit="handleSubmit(event)">
-                <div class="form-section">
-                    <div class="input-group">
-                        <label>Full Name</label>
-                        <div class="input-wrapper">
-                            <span class="input-icon">👤</span>
-                            <input 
-                                type="text" 
-                                id="fullName" 
-                                placeholder="Enter your full name"
-                                autocomplete="name">
-                        </div>
-                        <div class="error-msg" id="nameError">Please enter your full name</div>
-                    </div>
-
-                    <div class="input-group">
-                        <label>Email Address</label>
-                        <div class="input-wrapper">
-                            <span class="input-icon">✉️</span>
-                            <input 
-                                type="email" 
-                                id="email" 
-                                placeholder="Enter your email address"
-                                autocomplete="email">
-                        </div>
-                        <div class="error-msg" id="emailError">Please enter a valid email address</div>
-                    </div>
-
-                    <div class="input-group">
-                        <label>Candidate ID</label>
-                        <div class="input-wrapper">
-                            <span class="input-icon">🆔</span>
-                            <input 
-                                type="text" 
-                                id="candidateId" 
-                                placeholder="Enter your candidate ID"
-                                autocomplete="off">
-                        </div>
-                        <div class="error-msg" id="idError">Please enter your candidate ID</div>
-                    </div>
+            <div class="input-group">
+                <label>Full Name</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">👤</span>
+                    <input type="text" id="fullName" placeholder="Enter your full name">
                 </div>
+                <div class="error-msg" id="nameError">Please enter your full name</div>
+            </div>
 
-                <!-- <div class="info-banner">
-                    <p>📌 Your information will be used solely for assessment purposes and will be kept confidential in accordance with our privacy policy.</p>
-                </div> -->
-
-                <button type="submit" class="submit-btn">Continue to Assessment</button>
-
-                <div class="footer-note">
-                    By continuing, you agree to our terms of service
+            <div class="input-group">
+                <label>Candidate ID</label>
+                <div class="input-wrapper">
+                    <span class="input-icon">🆔</span>
+                    <input type="text" id="candidateId" placeholder="Enter your candidate ID">
                 </div>
-            </form>
+                <div class="error-msg" id="idError">Please enter your candidate ID</div>
+            </div>
+
+            <button class="start-btn" id="startBtn" onclick="startTest()">Begin Assessment</button>
+            
+            <div class="connection-status" id="connectionStatus"></div>
         </div>
-    </div>
 
-    <!-- Success Screen -->
-    <div class="success-screen" id="successScreen">
-        <div class="success-icon">✓</div>
-        <h2>Registration Complete!</h2>
-        <p>Your information has been successfully recorded.</p>
-        <p>The assessment will begin shortly.</p>
+        <!-- Test Interface -->
+        <div class="test-container" id="testContainer">
+            <div class="top-bar">
+                <div class="candidate-info">
+                    <h2 id="displayName"></h2>
+                    <span>ID: <span id="displayId"></span></span>
+                </div>
+                <div class="part-indicator" id="partIndicator">PART 1</div>
+            </div>
 
-        <div class="candidate-details" id="candidateDetails">
-            <div class="detail-row">
-                <span class="detail-label">Full Name</span>
-                <span class="detail-value" id="displayName"></span>
+            <div class="content-grid">
+                <div class="voice-panel">
+                    <div class="panel-header">
+                        <div class="panel-title">
+                            <div class="recording-indicator" id="recordingIndicator"></div>
+                            <h3>IELTS Examiner</h3>
+                        </div>
+                        <div class="ai-avatar">🤖</div>
+                    </div>
+                    
+                    <div class="wave-container">
+                        <div class="wave-wrapper">
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                            <div class="wave-bar"></div>
+                        </div>
+                    </div>
+
+                    <div class="cue-card" id="cueCard">
+                        <div class="cue-card-header">
+                            <h4>📋 Cue Card</h4>
+                            <p>Read the topic carefully and prepare your response</p>
+                        </div>
+                        
+                        <div class="cue-card-topic">
+                            <h5>Describe:</h5>
+                            <p id="cueCardTopic">A memorable journey you have made</p>
+                        </div>
+
+                        <div class="cue-card-points">
+                            <h5>You should say:</h5>
+                            <ul id="cueCardPoints">
+                                <li>Where you went</li>
+                                <li>Who you went with</li>
+                                <li>What you did during the journey</li>
+                                <li>And explain why this journey was memorable</li>
+                            </ul>
+                        </div>
+
+                        <div class="cue-card-footer">
+                            <p>⏱️ You have 1 minute to prepare • You should speak for 1-2 minutes</p>
+                        </div>
+                    </div>
+
+                    <div class="ai-message" id="currentAiMessage">
+                        <div class="ai-message-label">Examiner:</div>
+                        <div class="ai-message-text" id="aiMessageText">Connecting to examiner...</div>
+                    </div>
+                    
+                    <button class="finish-btn" id="finishBtn" onclick="finishTest()" disabled>End Test</button>
+                </div>
+
+                <div class="transcript-panel">
+                    <h3>📋 Conversation Transcript</h3>
+                    <div class="transcript-content" id="transcriptContent"></div>
+                    <button class="download-btn" onclick="downloadTranscript()">⬇ Download Transcript</button>
+                </div>
             </div>
-            <div class="detail-row">
-                <span class="detail-label">Email</span>
-                <span class="detail-value" id="displayEmail"></span>
-            </div>
-            <div class="detail-row">
-                <span class="detail-label">Candidate ID</span>
-                <span class="detail-value" id="displayId"></span>
-            </div>
+        </div>
+
+        <!-- Completion Screen -->
+        <div class="completion-screen" id="completionScreen">
+            <div class="success-icon">✓</div>
+            <h2>Test Complete!</h2>
+            <p>Thank you for completing your IELTS speaking test.<br>Your performance has been recorded and will be evaluated.</p>
         </div>
     </div>
 
     <script>
-        function validateEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
+        // Configuration
+        const API_BASE_URL = 'http://localhost:8080';
+        
+        // Global variables
+        let room = null;
+        let isTestActive = false;
+        let transcript = [];
+        let currentPart = 1;
+        let livekitConfig = null;
+
+        // Wait for LiveKit to load
+        function waitForLiveKit() {
+            return new Promise((resolve) => {
+                if (typeof window.LivekitClient !== 'undefined') {
+                    resolve();
+                } else {
+                    const checkInterval = setInterval(() => {
+                        if (typeof window.LivekitClient !== 'undefined') {
+                            clearInterval(checkInterval);
+                            resolve();
+                        }
+                    }, 100);
+                }
+            });
         }
 
-        function handleSubmit(event) {
-            event.preventDefault();
+        // Status update helper
+        function updateConnectionStatus(message, type) {
+            const statusEl = document.getElementById('connectionStatus');
+            statusEl.textContent = message;
+            statusEl.className = 'connection-status show ' + type;
+        }
 
-            const name = document.getElementById('fullName').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const id = document.getElementById('candidateId').value.trim();
+        // Initialize and connect to LiveKit
+        async function initializeLiveKit() {
+            try {
+                updateConnectionStatus('Connecting to server...', 'connecting');
+                
+                // Start the LiveKit agent
+                const startResponse = await fetch(`${API_BASE_URL}/start_server`, {
+                    method: 'POST'
+                });
+                const startData = await startResponse.json();
+                console.log('Server start response:', startData);
+                
+                // Wait a bit for the agent to fully initialize
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Get LiveKit configuration
+                const configResponse = await fetch(`${API_BASE_URL}/config`);
+                livekitConfig = await configResponse.json();
+                
+                if (livekitConfig.error) {
+                    throw new Error(livekitConfig.error);
+                }
+                
+                console.log('LiveKit config received');
+                updateConnectionStatus('Server ready', 'connected');
+                return true;
+                
+            } catch (error) {
+                console.error('Failed to initialize LiveKit:', error);
+                updateConnectionStatus('Connection failed: ' + error.message, 'error');
+                return false;
+            }
+        }
+
+        // Connect to LiveKit room
+        async function connectToRoom() {
+            try {
+                // Ensure LiveKit is loaded
+                await waitForLiveKit();
+                
+                if (!livekitConfig || !livekitConfig.url || !livekitConfig.token) {
+                    throw new Error('Invalid LiveKit configuration');
+                }
+                
+                updateConnectionStatus('Joining voice room...', 'connecting');
+                
+                // Create room instance using the global LivekitClient
+                const { Room, RoomEvent, Track } = window.LivekitClient;
+                
+                room = new Room({
+                    adaptiveStream: true,
+                    dynacast: true,
+                });
+                
+                // Setup event listeners
+                setupRoomEventListeners();
+                
+                // Connect to room
+                await room.connect(livekitConfig.url, livekitConfig.token);
+                
+                console.log('Connected to LiveKit room:', room.name);
+                updateConnectionStatus('Connected to examiner', 'connected');
+                
+                // Enable local audio
+                await room.localParticipant.setMicrophoneEnabled(true);
+                
+                return true;
+                
+            } catch (error) {
+                console.error('Failed to connect to room:', error);
+                updateConnectionStatus('Failed to join room: ' + error.message, 'error');
+                return false;
+            }
+        }
+
+        // Setup room event listeners
+        function setupRoomEventListeners() {
+            const { RoomEvent, Track } = window.LivekitClient;
             
+            // Handle participant connection
+            room.on(RoomEvent.ParticipantConnected, (participant) => {
+                console.log('Participant connected:', participant.identity);
+                if (participant.identity.includes('agent')) {
+                    updateRecordingIndicator(true);
+                    document.getElementById('finishBtn').disabled = false;
+                }
+            });
+            
+            // Handle track subscription (for receiving audio from agent)
+            room.on(RoomEvent.TrackSubscribed, (track, publication, participant) => {
+                console.log('Track subscribed:', track.kind, 'from', participant.identity);
+                
+                if (track.kind === Track.Kind.Audio) {
+                    // Attach audio track to play agent's voice
+                    const audioElement = track.attach();
+                    document.body.appendChild(audioElement);
+                }
+            });
+            
+            // Handle transcription data (if available)
+            room.on(RoomEvent.DataReceived, (payload, participant) => {
+                try {
+                    const decoder = new TextDecoder();
+                    const data = JSON.parse(decoder.decode(payload));
+                    console.log('Data received:', data);
+                    
+                    // Handle different data types (transcription, messages, etc.)
+                    if (data.type === 'transcription') {
+                        handleTranscription(data);
+                    }
+                } catch (error) {
+                    console.error('Error processing data:', error);
+                }
+            });
+            
+            // Handle participant disconnection
+            room.on(RoomEvent.ParticipantDisconnected, (participant) => {
+                console.log('Participant disconnected:', participant.identity);
+            });
+            
+            // Handle room disconnection
+            room.on(RoomEvent.Disconnected, () => {
+                console.log('Disconnected from room');
+                updateRecordingIndicator(false);
+            });
+            
+            // Handle connection quality changes
+            room.on(RoomEvent.ConnectionQualityChanged, (quality, participant) => {
+                console.log('Connection quality:', quality, 'for', participant.identity);
+            });
+        }
+
+        // Handle transcription data
+        function handleTranscription(data) {
+            const { role, text, isFinal } = data;
+            
+            if (isFinal && text) {
+                if (role === 'assistant') {
+                    showAiMessage(text);
+                } else if (role === 'user') {
+                    addUserResponse(text);
+                }
+            }
+        }
+
+        // Update recording indicator
+        function updateRecordingIndicator(active) {
+            const indicator = document.getElementById('recordingIndicator');
+            if (active) {
+                indicator.classList.remove('inactive');
+            } else {
+                indicator.classList.add('inactive');
+            }
+        }
+
+        // Start test function
+        async function startTest() {
+            const name = document.getElementById('fullName').value.trim();
+            const id = document.getElementById('candidateId').value.trim();
             let isValid = true;
 
-            // Validate name
             if (!name) {
                 document.getElementById('fullName').classList.add('error');
                 document.getElementById('nameError').classList.add('show');
@@ -527,17 +1120,6 @@
                 document.getElementById('nameError').classList.remove('show');
             }
 
-            // Validate email
-            if (!email || !validateEmail(email)) {
-                document.getElementById('email').classList.add('error');
-                document.getElementById('emailError').classList.add('show');
-                isValid = false;
-            } else {
-                document.getElementById('email').classList.remove('error');
-                document.getElementById('emailError').classList.remove('show');
-            }
-
-            // Validate ID
             if (!id) {
                 document.getElementById('candidateId').classList.add('error');
                 document.getElementById('idError').classList.add('show');
@@ -549,25 +1131,162 @@
 
             if (!isValid) return;
 
-            // Show success screen
-            document.getElementById('registrationContainer').style.display = 'none';
-            document.getElementById('successScreen').classList.add('show');
-            
-            // Display candidate information
-            document.getElementById('displayName').textContent = name;
-            document.getElementById('displayEmail').textContent = email;
-            document.getElementById('displayId').textContent = id;
+            // Disable start button
+            const startBtn = document.getElementById('startBtn');
+            startBtn.disabled = true;
+            startBtn.textContent = 'Connecting...';
 
-            // Store data (you can send this to a server or use it as needed)
-            const candidateData = {
-                name: name,
-                email: email,
-                id: id,
-                timestamp: new Date().toISOString()
-            };
+            // Initialize LiveKit
+            const initialized = await initializeLiveKit();
+            if (!initialized) {
+                startBtn.disabled = false;
+                startBtn.textContent = 'Begin Assessment';
+                return;
+            }
+
+            // Connect to room
+            const connected = await connectToRoom();
+            if (!connected) {
+                startBtn.disabled = false;
+                startBtn.textContent = 'Begin Assessment';
+                return;
+            }
+
+            // Hide user info card
+            document.getElementById('userInfoCard').classList.add('hidden');
             
-            console.log('Candidate registered:', candidateData);
+            // Start the test immediately
+            setTimeout(() => {
+                document.getElementById('testContainer').classList.add('active');
+                document.getElementById('displayName').textContent = name;
+                document.getElementById('displayId').textContent = id;
+                
+                isTestActive = true;
+                updateAiMessage('Good morning! Welcome to your IELTS speaking test. The examiner will begin shortly...');
+            }, 400);
         }
+
+        // Update AI message display
+        function updateAiMessage(text) {
+            const messageEl = document.getElementById('aiMessageText');
+            messageEl.textContent = text;
+        }
+
+        // Show AI message and add to transcript
+        function showAiMessage(text) {
+            if (!isTestActive) return;
+
+            updateAiMessage(text);
+            
+            const time = new Date().toLocaleTimeString();
+            addTranscriptEntry('ai', text, time);
+        }
+
+        // Add user response to transcript
+        function addUserResponse(text) {
+            if (!isTestActive) return;
+
+            const time = new Date().toLocaleTimeString();
+            addTranscriptEntry('user', text, time);
+        }
+
+        // Add entry to transcript
+        function addTranscriptEntry(type, text, time) {
+            const container = document.getElementById('transcriptContent');
+            
+            const entry = document.createElement('div');
+            entry.className = `transcript-entry ${type}-entry`;
+            
+            const speaker = type === 'ai' ? 'Examiner' : 'Candidate';
+            const icon = type === 'ai' ? '🤖' : '👤';
+            
+            entry.innerHTML = `
+                <div class="entry-header">
+                    <div class="entry-speaker">
+                        <div class="speaker-icon">${icon}</div>
+                        ${speaker}
+                    </div>
+                    <div class="entry-time">${time}</div>
+                </div>
+                <div class="entry-content">${text}</div>
+            `;
+            
+            container.appendChild(entry);
+            container.scrollTop = container.scrollHeight;
+            
+            transcript.push({
+                type: type,
+                speaker: speaker,
+                text: text,
+                time: time
+            });
+        }
+
+        // Finish test
+        async function finishTest() {
+            if (!isTestActive) return;
+            
+            isTestActive = false;
+            
+            // Disconnect from room
+            if (room) {
+                await room.disconnect();
+                room = null;
+            }
+            
+            // Stop the server
+            try {
+                await fetch(`${API_BASE_URL}/stop_server`, { method: 'POST' });
+            } catch (error) {
+                console.error('Error stopping server:', error);
+            }
+            
+            document.getElementById('finishBtn').disabled = true;
+            document.getElementById('testContainer').style.display = 'none';
+            document.getElementById('completionScreen').classList.add('show');
+        }
+
+        // Download transcript
+        function downloadTranscript() {
+            const name = document.getElementById('displayName').textContent;
+            const id = document.getElementById('displayId').textContent;
+            
+            const header = `═══════════════════════════════════════════════\n  IELTS SPEAKING TEST - OFFICIAL TRANSCRIPT\n═══════════════════════════════════════════════\n\n`;
+            const info = `Candidate Name: ${name}\nCandidate ID: ${id}\nTest Date: ${new Date().toLocaleDateString()}\nTest Time: ${new Date().toLocaleTimeString()}\n\n`;
+            const divider = `───────────────────────────────────────────────\n\n`;
+            
+            let content = header + info + divider;
+            
+            transcript.forEach((entry, index) => {
+                content += `[${entry.time}] ${entry.speaker}:\n`;
+                content += `${entry.text}\n\n`;
+                if (index < transcript.length - 1) {
+                    content += `---\n\n`;
+                }
+            });
+            
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `IELTS_Speaking_Test_${id}_${Date.now()}.txt`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', async () => {
+            if (room) {
+                await room.disconnect();
+            }
+            try {
+                await fetch(`${API_BASE_URL}/stop_server`, { method: 'POST' });
+            } catch (error) {
+                console.error('Error stopping server:', error);
+            }
+        });
     </script>
 </body>
 </html>

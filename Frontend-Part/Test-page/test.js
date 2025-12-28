@@ -1,34 +1,194 @@
 
-let countdown;
-let timeRemaining = 160;
+// Configuration
+const API_BASE_URL = 'http://localhost:8080';
+
+// Global variables
+let room = null;
 let isTestActive = false;
 let transcript = [];
+let currentPart = 1;
+let livekitConfig = null;
 
-const aiPrompts = [
-    "Hello! Welcome to your speaking assessment. Let's begin by having you introduce yourself.",
-    "That's wonderful. Could you elaborate on your educational qualifications and academic achievements?",
-    "Interesting. What professional goals are you working towards in your career?",
-    "Please describe a significant challenge you've encountered and explain how you resolved it.",
-    "I'd like to know more about your personal interests. What hobbies do you enjoy in your free time?",
-    "How do you typically manage stressful situations and maintain your productivity under pressure?",
-    "Can you share an example of a successful team collaboration experience you've had?",
-    "Finally, what do you consider to be the most critical skills for achieving success in your field?"
-];
+// Wait for LiveKit to load
+function waitForLiveKit() {
+    return new Promise((resolve) => {
+        if (typeof window.LivekitClient !== 'undefined') {
+            resolve();
+        } else {
+            const checkInterval = setInterval(() => {
+                if (typeof window.LivekitClient !== 'undefined') {
+                    clearInterval(checkInterval);
+                    resolve();
+                }
+            }, 100);
+        }
+    });
+}
 
-const userAnswers = [
-    "Good morning! My name is Sarah Johnson, and I'm delighted to participate in this assessment today.",
-    "I graduated with honors from the University of California, earning my Bachelor's degree in Computer Science in 2021.",
-    "My primary goal is to become a lead software architect and contribute to innovative technology solutions.",
-    "During a critical project deadline, our system crashed. I coordinated with the team to implement a backup solution within 24 hours.",
-    "I'm passionate about photography and digital art. I also enjoy competitive swimming and exploring new technologies.",
-    "I use time management techniques and prioritize tasks effectively. Regular exercise and meditation help me stay focused.",
-    "In my previous role, I led a cross-functional team of eight people to successfully launch a customer portal application.",
-    "I believe adaptability, strong communication, continuous learning, and problem-solving abilities are fundamental to success."
-];
+// Status update helper
+function updateConnectionStatus(message, type) {
+    const statusEl = document.getElementById('connectionStatus');
+    statusEl.textContent = message;
+    statusEl.className = 'connection-status show ' + type;
+}
 
-let currentIndex = 0;
+// Initialize and connect to LiveKit
+async function initializeLiveKit() {
+    try {
+        updateConnectionStatus('Connecting to server...', 'connecting');
 
-function startTest() {
+        // Start the LiveKit agent
+        const startResponse = await fetch(`${API_BASE_URL}/start_server`, {
+            method: 'POST'
+        });
+        const startData = await startResponse.json();
+        console.log('Server start response:', startData);
+
+        // Wait a bit for the agent to fully initialize
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        // Get LiveKit configuration
+        const configResponse = await fetch(`${API_BASE_URL}/config`);
+        livekitConfig = await configResponse.json();
+
+        if (livekitConfig.error) {
+            throw new Error(livekitConfig.error);
+        }
+
+        console.log('LiveKit config received');
+        updateConnectionStatus('Server ready', 'connected');
+        return true;
+
+    } catch (error) {
+        console.error('Failed to initialize LiveKit:', error);
+        updateConnectionStatus('Connection failed: ' + error.message, 'error');
+        return false;
+    }
+}
+
+// Connect to LiveKit room
+async function connectToRoom() {
+    try {
+        // Ensure LiveKit is loaded
+        await waitForLiveKit();
+
+        if (!livekitConfig || !livekitConfig.url || !livekitConfig.token) {
+            throw new Error('Invalid LiveKit configuration');
+        }
+
+        updateConnectionStatus('Joining voice room...', 'connecting');
+
+        // Create room instance using the global LivekitClient
+        const { Room, RoomEvent, Track } = window.LivekitClient;
+
+        room = new Room({
+            adaptiveStream: true,
+            dynacast: true,
+        });
+
+        // Setup event listeners
+        setupRoomEventListeners();
+
+        // Connect to room
+        await room.connect(livekitConfig.url, livekitConfig.token);
+
+        console.log('Connected to LiveKit room:', room.name);
+        updateConnectionStatus('Connected to examiner', 'connected');
+
+        // Enable local audio
+        await room.localParticipant.setMicrophoneEnabled(true);
+
+        return true;
+
+    } catch (error) {
+        console.error('Failed to connect to room:', error);
+        updateConnectionStatus('Failed to join room: ' + error.message, 'error');
+        return false;
+    }
+}
+
+// Setup room event listeners
+function setupRoomEventListeners() {
+    const { RoomEvent, Track } = window.LivekitClient;
+
+    // Handle participant connection
+    room.on(RoomEvent.ParticipantConnected, (participant) => {
+        console.log('Participant connected:', participant.identity);
+        if (participant.identity.includes('agent')) {
+            updateRecordingIndicator(true);
+            document.getElementById('finishBtn').disabled = false;
+        }
+    });
+
+    // Handle track subscription (for receiving audio from agent)
+    room.on(RoomEvent.TrackSubscribed, (track, publication, participant) => {
+        console.log('Track subscribed:', track.kind, 'from', participant.identity);
+
+        if (track.kind === Track.Kind.Audio) {
+            // Attach audio track to play agent's voice
+            const audioElement = track.attach();
+            document.body.appendChild(audioElement);
+        }
+    });
+
+    // Handle transcription data (if available)
+    room.on(RoomEvent.DataReceived, (payload, participant) => {
+        try {
+            const decoder = new TextDecoder();
+            const data = JSON.parse(decoder.decode(payload));
+            console.log('Data received:', data);
+
+            // Handle different data types (transcription, messages, etc.)
+            if (data.type === 'transcription') {
+                handleTranscription(data);
+            }
+        } catch (error) {
+            console.error('Error processing data:', error);
+        }
+    });
+
+    // Handle participant disconnection
+    room.on(RoomEvent.ParticipantDisconnected, (participant) => {
+        console.log('Participant disconnected:', participant.identity);
+    });
+
+    // Handle room disconnection
+    room.on(RoomEvent.Disconnected, () => {
+        console.log('Disconnected from room');
+        updateRecordingIndicator(false);
+    });
+
+    // Handle connection quality changes
+    room.on(RoomEvent.ConnectionQualityChanged, (quality, participant) => {
+        console.log('Connection quality:', quality, 'for', participant.identity);
+    });
+}
+
+// Handle transcription data
+function handleTranscription(data) {
+    const { role, text, isFinal } = data;
+
+    if (isFinal && text) {
+        if (role === 'assistant') {
+            showAiMessage(text);
+        } else if (role === 'user') {
+            addUserResponse(text);
+        }
+    }
+}
+
+// Update recording indicator
+function updateRecordingIndicator(active) {
+    const indicator = document.getElementById('recordingIndicator');
+    if (active) {
+        indicator.classList.remove('inactive');
+    } else {
+        indicator.classList.add('inactive');
+    }
+}
+
+// Start test function
+async function startTest() {
     const name = document.getElementById('fullName').value.trim();
     const id = document.getElementById('candidateId').value.trim();
     let isValid = true;
@@ -53,81 +213,58 @@ function startTest() {
 
     if (!isValid) return;
 
+    // Disable start button
+    const startBtn = document.getElementById('startBtn');
+    startBtn.disabled = true;
+    startBtn.textContent = 'Connecting...';
+
+    // Initialize LiveKit
+    const initialized = await initializeLiveKit();
+    if (!initialized) {
+        startBtn.disabled = false;
+        startBtn.textContent = 'Begin Assessment';
+        return;
+    }
+
+    // Connect to room
+    const connected = await connectToRoom();
+    if (!connected) {
+        startBtn.disabled = false;
+        startBtn.textContent = 'Begin Assessment';
+        return;
+    }
+
+    // Hide user info card
     document.getElementById('userInfoCard').classList.add('hidden');
+
+    // Start the test immediately
     setTimeout(() => {
         document.getElementById('testContainer').classList.add('active');
         document.getElementById('displayName').textContent = name;
         document.getElementById('displayId').textContent = id;
 
         isTestActive = true;
-        initTimer();
-        beginConversation();
+        updateAiMessage('Good morning! Welcome to your IELTS speaking test. The examiner will begin shortly...');
     }, 400);
 }
 
-function initTimer() {
-    updateTimer();
-    countdown = setInterval(() => {
-        timeRemaining--;
-        updateTimer();
-
-        if (timeRemaining <= 0) {
-            clearInterval(countdown);
-            finishTest();
-        }
-    }, 1000);
+// Update AI message display
+function updateAiMessage(text) {
+    const messageEl = document.getElementById('aiMessageText');
+    messageEl.textContent = text;
 }
 
-function updateTimer() {
-    const display = document.getElementById('timerDisplay');
-    const bar = document.getElementById('progressBar');
-
-    display.textContent = timeRemaining;
-
-    const percent = (timeRemaining / 160) * 100;
-    bar.style.width = percent + '%';
-
-    display.className = 'timer-display';
-    if (timeRemaining > 60) {
-        bar.style.background = 'linear-gradient(90deg, var(--success), var(--success))';
-    } else if (timeRemaining > 30) {
-        display.classList.add('warning');
-        bar.style.background = 'linear-gradient(90deg, var(--accent), var(--accent))';
-    } else {
-        display.classList.add('danger');
-        bar.style.background = 'linear-gradient(90deg, #EF4444, #EF4444)';
-    }
-}
-
-function beginConversation() {
-    setTimeout(() => showAiMessage(aiPrompts[0]), 600);
-
-    let delay = 4500;
-    for (let i = 0; i < Math.min(aiPrompts.length, userAnswers.length); i++) {
-        setTimeout(() => {
-            if (isTestActive) addUserResponse(userAnswers[i]);
-        }, delay);
-        delay += 5500;
-
-        if (i + 1 < aiPrompts.length) {
-            setTimeout(() => {
-                if (isTestActive) showAiMessage(aiPrompts[i + 1]);
-            }, delay);
-            delay += 3500;
-        }
-    }
-}
-
+// Show AI message and add to transcript
 function showAiMessage(text) {
     if (!isTestActive) return;
 
-    const messageEl = document.getElementById('aiMessageText');
-    messageEl.textContent = text;
+    updateAiMessage(text);
 
     const time = new Date().toLocaleTimeString();
     addTranscriptEntry('ai', text, time);
 }
 
+// Add user response to transcript
 function addUserResponse(text) {
     if (!isTestActive) return;
 
@@ -135,13 +272,14 @@ function addUserResponse(text) {
     addTranscriptEntry('user', text, time);
 }
 
+// Add entry to transcript
 function addTranscriptEntry(type, text, time) {
     const container = document.getElementById('transcriptContent');
 
     const entry = document.createElement('div');
     entry.className = `transcript-entry ${type}-entry`;
 
-    const speaker = type === 'ai' ? 'AI Assessor' : 'Your Response';
+    const speaker = type === 'ai' ? 'Examiner' : 'Candidate';
     const icon = type === 'ai' ? '🤖' : '👤';
 
     entry.innerHTML = `
@@ -158,7 +296,6 @@ function addTranscriptEntry(type, text, time) {
     container.appendChild(entry);
     container.scrollTop = container.scrollHeight;
 
-    // Store for download
     transcript.push({
         type: type,
         speaker: speaker,
@@ -167,27 +304,36 @@ function addTranscriptEntry(type, text, time) {
     });
 }
 
-function updateTranscript() {
-    const transcriptBox = document.getElementById('transcriptContent');
-    transcriptBox.scrollTop = transcriptBox.scrollHeight;
-}
-
-function finishTest() {
+// Finish test
+async function finishTest() {
     if (!isTestActive) return;
 
     isTestActive = false;
-    clearInterval(countdown);
+
+    // Disconnect from room
+    if (room) {
+        await room.disconnect();
+        room = null;
+    }
+
+    // Stop the server
+    try {
+        await fetch(`${API_BASE_URL}/stop_server`, { method: 'POST' });
+    } catch (error) {
+        console.error('Error stopping server:', error);
+    }
 
     document.getElementById('finishBtn').disabled = true;
     document.getElementById('testContainer').style.display = 'none';
     document.getElementById('completionScreen').classList.add('show');
 }
 
+// Download transcript
 function downloadTranscript() {
     const name = document.getElementById('displayName').textContent;
     const id = document.getElementById('displayId').textContent;
 
-    const header = `═══════════════════════════════════════════════\n  AI SPEAKING TEST - OFFICIAL TRANSCRIPT\n═══════════════════════════════════════════════\n\n`;
+    const header = `═══════════════════════════════════════════════\n  IELTS SPEAKING TEST - OFFICIAL TRANSCRIPT\n═══════════════════════════════════════════════\n\n`;
     const info = `Candidate Name: ${name}\nCandidate ID: ${id}\nTest Date: ${new Date().toLocaleDateString()}\nTest Time: ${new Date().toLocaleTimeString()}\n\n`;
     const divider = `───────────────────────────────────────────────\n\n`;
 
@@ -205,9 +351,21 @@ function downloadTranscript() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `AI_Speaking_Test_${id}_${Date.now()}.txt`;
+    link.download = `IELTS_Speaking_Test_${id}_${Date.now()}.txt`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
 }
+
+// Cleanup on page unload
+window.addEventListener('beforeunload', async () => {
+    if (room) {
+        await room.disconnect();
+    }
+    try {
+        await fetch(`${API_BASE_URL}/stop_server`, { method: 'POST' });
+    } catch (error) {
+        console.error('Error stopping server:', error);
+    }
+});
